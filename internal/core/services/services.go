@@ -31,3 +31,7 @@ func (m *MessengerService) ReadMessage(id string) (*domain.Message, error) {
 func (m *MessengerService) ReadMessages() ([]*domain.Message, error) {
 	return m.repo.ReadMessages()
 }
+
+func (m *MessengerService) DeleteMessage(id string) error {
+	return m.repo.DeleteMessage(id)
+}

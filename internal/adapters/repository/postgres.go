@@ -67,3 +67,12 @@ func (m *MessengerPostgresRepository) ReadMessages() ([]*domain.Message, error) 
 	}
 	return messages, nil
 }
+
+func (m *MessengerPostgresRepository) DeleteMessage(id string) error {
+	message := &domain.Message{}
+	req := m.db.Delete(&message, "id = ? ", id)
+	if req.RowsAffected == 0 {
+		return errors.New("message not found")
+	}
+	return nil
+}

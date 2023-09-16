@@ -62,6 +62,21 @@ func (h *HTTPHandler) ReadMessages(c echo.Context) error {
 
 	}
 
-	return c.JSON(http.StatusOK, message)
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"data": message,
+	})
 
+}
+func (h *HTTPHandler) DeleteMessage(c echo.Context) error {
+	id := c.Param("id")
+	err := h.srv.DeleteMessage(id)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, map[string]string{
+			"error": err.Error(),
+		})
+
+	}
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"message": "Message deleted successfully",
+	})
 }

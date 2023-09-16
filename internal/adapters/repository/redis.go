@@ -67,3 +67,10 @@ func (r *MessengerRedisRepository) ReadMessages() ([]*domain.Message, error) {
 
 	return messages, nil
 }
+
+func (r *MessengerRedisRepository) DeleteMessage(id string) error {
+
+	r.client.HDel("messages", id)
+
+	return nil
+}

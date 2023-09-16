@@ -40,9 +40,9 @@ func InitRoutes() {
 	handler := handler.NewHTTPHandler(*srv)
 
 	e.POST("/messages", handler.SaveMessage)
-	e.GET("/messages/:id", handler.ReadMessage)
 	e.GET("/messages", handler.ReadMessages)
-
+	e.GET("/messages/:id", handler.ReadMessage)
+	e.DELETE("/messages/:id", handler.DeleteMessage)
 	if err := e.Start(":8080"); err != http.ErrServerClosed {
 		log.Fatal(err)
 	}
