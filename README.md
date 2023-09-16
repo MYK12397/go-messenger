@@ -1,5 +1,5 @@
 # go-messenger
-## A Messaging service that makes use of Hexagonal Architecture.
+### A Messaging service that makes use of Hexagonal Architecture.
 
 ## Tech Stack
 * echo
