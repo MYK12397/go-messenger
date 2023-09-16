@@ -13,10 +13,9 @@ import (
 )
 
 var (
-	repo        = flag.String("db", "postgres", "Database for storing messages")
-	redisHost   = "localhost:6379"
-	httpHandler *handler.HTTPHandler
-	srv         *services.MessengerService
+	repo      = flag.String("db", "postgres", "Database for storing messages")
+	redisHost = "localhost:6379"
+	srv       *services.MessengerService
 )
 
 func main() {
