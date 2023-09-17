@@ -1,10 +1,16 @@
 package main
 
 import (
+	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/MYK12397/go-messenger/internal/adapters/handler"
 	"github.com/MYK12397/go-messenger/internal/adapters/repository"
@@ -32,10 +38,31 @@ func main() {
 		srv = services.NewMessengerService(store)
 	}
 
-	InitRoutes()
+	e := InitRoutes()
+
+	go func() {
+
+		if err := e.Start(":8080"); !errors.Is(err, http.ErrServerClosed) {
+			log.Fatalf("HTTP server error: %v ", err)
+		}
+		log.Println("Serving new connections stopped.")
+	}()
+
+	sigChan := make(chan os.Signal, 1)
+	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
+	<-sigChan
+
+	ctxShutdown, releaseShutdown := context.WithTimeout(context.Background(), 10*time.Second)
+	defer releaseShutdown()
+
+	if err := e.Shutdown(ctxShutdown); err != nil {
+		log.Fatalf("shutdown error: %v", err)
+	}
+	log.Println("graceful shutdown finished.")
+
 }
 
-func InitRoutes() {
+func InitRoutes() *echo.Echo {
 	e := echo.New()
 	handler := handler.NewHTTPHandler(*srv)
 
@@ -43,7 +70,6 @@ func InitRoutes() {
 	e.GET("/messages", handler.ReadMessages)
 	e.GET("/messages/:id", handler.ReadMessage)
 	e.DELETE("/messages/:id", handler.DeleteMessage)
-	if err := e.Start(":8080"); err != http.ErrServerClosed {
-		log.Fatal(err)
-	}
+
+	return e
 }

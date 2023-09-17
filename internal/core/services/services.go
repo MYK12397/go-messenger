@@ -7,10 +7,10 @@ import (
 )
 
 type MessengerService struct {
-	repo ports.MessengerRepository
+	repo ports.Repository
 }
 
-func NewMessengerService(repo ports.MessengerRepository) *MessengerService {
+func NewMessengerService(repo ports.Repository) *MessengerService {
 	return &MessengerService{
 		repo: repo,
 	}
