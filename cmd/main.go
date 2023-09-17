@@ -58,7 +58,7 @@ func main() {
 	if err := e.Shutdown(ctxShutdown); err != nil {
 		log.Fatalf("shutdown error: %v", err)
 	}
-	log.Println("graceful shutdown finished.")
+	log.Println("graceful shutdown completed.")
 
 }
 
