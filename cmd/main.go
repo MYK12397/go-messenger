@@ -42,7 +42,7 @@ func main() {
 
 	go func() {
 
-		if err := e.Start(":8080"); !errors.Is(err, http.ErrServerClosed) {
+		if err := e.Start("0.0.0.0:8080"); !errors.Is(err, http.ErrServerClosed) {
 			log.Fatalf("HTTP server error: %v ", err)
 		}
 		log.Println("Serving new connections stopped.")
