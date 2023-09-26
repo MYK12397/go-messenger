@@ -26,5 +26,6 @@ require (
 require (
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.1.1 // indirect
 )
