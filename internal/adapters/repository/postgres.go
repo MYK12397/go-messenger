@@ -14,7 +14,7 @@ type MessengerPostgresRepository struct {
 }
 
 func NewMessengerPostgresRepository() *MessengerPostgresRepository {
-	host := "db"
+	host := "localhost"
 	port := "5432"
 	password := "admin"
 	dbname := "postgres"

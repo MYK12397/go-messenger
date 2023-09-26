@@ -15,6 +15,7 @@ import (
 	"github.com/MYK12397/go-messenger/internal/adapters/handler"
 	"github.com/MYK12397/go-messenger/internal/adapters/repository"
 	"github.com/MYK12397/go-messenger/internal/core/services"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 )
 
@@ -25,6 +26,12 @@ var (
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+
+		log.Fatal("Error loading .env file")
+	}
+
 	flag.Parse()
 	fmt.Printf("Application running using %s\n", *repo)
 
@@ -39,7 +46,9 @@ func main() {
 	}
 
 	e := InitRoutes()
+
 	port := os.Getenv("PORT")
+
 	if port == "" {
 		port = "8080"
 	}
