@@ -14,10 +14,10 @@ type MessengerPostgresRepository struct {
 }
 
 func NewMessengerPostgresRepository() *MessengerPostgresRepository {
-	host := "localhost"
-	port := "5432"
-	password := "admin"
-	dbname := "postgres"
+	host := "containers-us-west-46.railway.app"
+	port := "6834"
+	password := "Wk42xNEhkhFwYHV4D6nt"
+	dbname := "railway"
 	user := "postgres"
 
 	conn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
@@ -27,7 +27,6 @@ func NewMessengerPostgresRepository() *MessengerPostgresRepository {
 		dbname,
 		password,
 	)
-
 	db, err := gorm.Open("postgres", conn)
 	if err != nil {
 		panic(err)
