@@ -17,7 +17,7 @@ type MessengerPostgresRepository struct {
 func NewMessengerPostgresRepository() *MessengerPostgresRepository {
 	host := os.Getenv("POSTGRES_HOST")
 	port := os.Getenv("POSTGRES_PORT")
-	password := os.Getenv("POSTGRES_PASSWORD")
+	password := "Wk42xNEhkhFwYHV4D6nt"
 	dbname := os.Getenv("POSTGRES_DB")
 	user := os.Getenv("POSTGRES_USER")
 
