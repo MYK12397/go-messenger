@@ -3,6 +3,7 @@ package repository
 import (
 	"errors"
 	"fmt"
+	"os"
 
 	"github.com/MYK12397/go-messenger/internal/core/domain"
 	"github.com/jinzhu/gorm"
@@ -14,11 +15,11 @@ type MessengerPostgresRepository struct {
 }
 
 func NewMessengerPostgresRepository() *MessengerPostgresRepository {
-	host := "localhost"
-	port := "5432"
-	password := "admin"
-	dbname := "postgres"
-	user := "postgres"
+	host := os.Getenv("POSTGRES_HOST")
+	port := os.Getenv("POSTGRES_PORT")
+	password := os.Getenv("POSTGRES_PASSWORD")
+	dbname := os.Getenv("POSTGRES_DB")
+	user := os.Getenv("POSTGRES_USER")
 
 	conn := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
 		host,
@@ -27,7 +28,6 @@ func NewMessengerPostgresRepository() *MessengerPostgresRepository {
 		dbname,
 		password,
 	)
-
 	db, err := gorm.Open("postgres", conn)
 	if err != nil {
 		panic(err)
