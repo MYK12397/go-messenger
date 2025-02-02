@@ -1,0 +1,28 @@
+# Binaries for programs, libs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
+# Temporary files
+tmp/
+
+# Dependency directories
+vendor/
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Environment variables
+.env
+
+# Misc
+.DS_Store
+
+# JSON files
+*.json
